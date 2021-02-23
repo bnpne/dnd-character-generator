@@ -31,8 +31,6 @@ const Character = () => {
   if (error) return <div>failed to load</div>
   if (!data) return <div>loading...</div>
 
-  console.log(data)
-
   sRace = raceList[Math.floor(Math.random() * raceList.length)]
   sClass = classList[Math.floor(Math.random() * classList.length)]
   tRace = raceList[Math.floor(Math.random() * raceList.length)]

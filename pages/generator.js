@@ -45,15 +45,15 @@ const Generator = () => {
                   alert('Please answer all of the questions')
                 }
                 else {
-                  // add({
-                  //   question_1: values.q1,
-                  //   question_2: values.q2,
-                  //   question_3: values.q3,
-                  //   question_4: values.q4,
-                  //   question_5: values.q5,
-                  //   question_6: values.q6,
-                  //   question_7: values.q7,
-                  // })
+                  add({
+                    question_1: values.q1,
+                    question_2: values.q2,
+                    question_3: values.q3,
+                    question_4: values.q4,
+                    question_5: values.q5,
+                    question_6: values.q6,
+                    question_7: values.q7,
+                  })
                   
                   const chaData = processData(
                     values.q1,
