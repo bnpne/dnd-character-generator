@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import Layout from '../components/Layout'
 import { Formik, Field, Form } from 'formik'
-import { useCollection } from '@nandorojo/swr-firestore'
-import {countData, countFive} from '../lib/countData'
+import { useCollection, useDocument, update } from '@nandorojo/swr-firestore'
+import {countData, countFive, countSix} from '../lib/countData'
 import { VictoryLine, VictoryChart, VictoryTheme } from 'victory'
+import Dropdown from 'react-dropdown'
+import 'react-dropdown/style.css'
 
 const Data = () => {
   const [auth, setAuth] = useState(false)
-
-  const { data , error} = useCollection('answers', {
-  })
+  const { data , error} = useCollection('answers')
+  const [question, setQuestion] = useState('')
 
   if (error) return <div>failed to load</div>
   if (!data) return <div>loading...</div>
@@ -17,13 +18,18 @@ const Data = () => {
   // Used for question one Chart
   var questionOneData = countData(data)
   var questionFiveData = countFive(data)
+  var questionSixData = countSix(data)
   // console.log(questionOneData)
+
+  const options = ['one', 'two', 'three']
+  const defaultOption = options[0]
   
+  console.log(question)
   return (
     <div>
       <Layout title="Data">
         <div className="max-w-3xl mx-auto mb-40 overflow-visible">
-          {auth ? (
+          {!auth ? (
             <div>
               <h1 className="font-extrabold text-xl">
                 Please enter password to see the data
@@ -104,13 +110,13 @@ const Data = () => {
                   domain={{ x: [1, 2], y: [0, 10] }}
                   categories={{ x: ['good', 'neutral', 'evil'] }}
                   style={{
-                    data: { stroke: '#000' },
+                    data: { stroke: '#55ff' },
                     parent: { border: '1px solid #ccc' },
                   }}
                   data={[
-                    { x: 1, y: questionFiveData.small },
-                    { x: 2, y: questionFiveData.medium },
-                    { x: 3, y: questionFiveData.large },
+                    { x: 1, y: questionSixData.good },
+                    { x: 2, y: questionSixData.neutral },
+                    { x: 3, y: questionSixData.evil },
                   ]}
                 />
               </VictoryChart>
